@@ -1,0 +1,49 @@
+# Определяем функцию для запроса данных о затратах на еду 
+def food_expenses(): 
+    food = []
+    while True:
+        try:
+            expense = float(input("Сколько вы потратили на еду? (введите 0 если хотите закончить) "))
+            if expense == 0:
+                break
+            food.append(expense)
+        except ValueError:
+            print("Введите корректное значение!")
+    return food
+
+# Определяем функцию для запроса данных о доходах 
+def income():     
+    salary = float(input("Какой у вас доход? "))  
+    return salary   
+
+# Получаем данные о расходах и доходах 
+food = food_expenses()  
+salary = income()   
+
+# Определяем функцию для расчета общих затрат на питание 
+def total_food_expenses(food_list):  
+    total = sum(food_list)     
+    return total  
+
+# Рассчитываем общие затраты на еду  
+total = total_food_expenses(food)   
+
+# Рассчитываем процентное соотношение расходов на еду к доходам 
+percent = total / salary * 100  
+
+# Определяем функцию для расчета средних затрат на еду в день  
+def average_expenses_per_day(total, period):     
+    days = len(period)  
+    average = round(total / days, 2)     
+    return average  
+
+# Получаем данные о периоде, за который пользователь хочет посмотреть свои расходы  
+period = input("За какой период времени вы хотите посмотреть свои расходы на еду? ")   
+
+# Рассчитываем средние затраты на еду в день 
+average = average_expenses_per_day(total, food)  
+  
+# Выводим результаты 
+print("Общие затраты на еду составили:", total)  
+print("Расходы на еду составляют", round(percent, 2), "% от дохода") 
+print("Средние затраты на еду в день:", average)
